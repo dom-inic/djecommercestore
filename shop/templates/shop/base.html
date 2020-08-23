@@ -1,0 +1,79 @@
+{% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+<link rel="stylesheet" href="{% static "shop/materialize/css/materialize.css" %}">
+<link rel="stylesheet" href="{% static "shop/materialize/css/materialize.min.css" %}">
+<link href="{% static 'shop/materialize/js/materialize.js' %}" rel="stylesheet">
+<link href="{% static 'shop/materialize/js/materialize.min.js' %}" rel="stylesheet">
+<link href="{% static 'shop/w3.css' %}" rel="stylesheet">
+
+</head>
+<nav>
+    <div class="container nav-wrapper">
+        <a href="/" class="brand-logo">mtushstore</a>
+        <ul id="nav-mobile" class="right">
+            <li><a href="/">Home</a></li>
+            <li> <a href="#">shop</a></li>
+            <li> <a href="#">shoes</a></li>
+            <li> <a href="#">jackets</a></li>
+            <li> <a href="#">shirts</a></li>
+            <li> <a href="#">about us</a></li>
+            <li> <a href="{% url 'addnewitem'%} ">New Item</a></li>
+            
+        </ul>
+    </div>
+</nav>
+<h1> welcome to mtush store, where we connect buyers to sellers </h1>
+<div class="box-wrapper" >
+<div class="box"></div>
+</div>
+
+        <div class="row">
+        {% for item in items %}
+            <div class="col s4">
+                <div class="large card">
+                <div class="card-title">
+                <i class="w3-animate-top" class="medium material-icons" style="color: #EE6E73">{{ item.title }}</i>
+                </div>
+                    <div class="card-image">
+                     <button class="btn-floating">addtocart</button>
+                     <h4> $ {{ item.price }} </h4>
+                     <a href="{% url 'detail' item.id %} " >
+                     
+                        <img class="w3-animate-top" src="{{ item.image.url }}" alt="property_image">
+                        </a>
+                    </div>
+                    
+                    <div class="divider"></div>
+                    <div class="card-content">
+                        <p>{{ item.description_short }}</p>
+                        
+                        <div class="row">
+                        
+                        </div>
+                    </div>
+        
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="w3-center">
+<ul class="w3-pagination w3-xlarge w3-border">
+{% if items.has_previous %}
+  <li><a href="?page=1" class="w3-hover-purple">&laquo; first</a></li>
+  <li><a href="?page={{ items.previous_page_number }}" class="w3-hover-green">previous</a></li>
+  {% endif %}
+  <li>
+  Page {{ items.number }} of {{ items.paginator.num_pages }}
+  <li>
+  {% if items.has_next %}
+  <li><a href="?page= {{ items.next_page_number }}" class="w3-hover-red"> next</a></li>
+  <li><a href="?page= {{ items.paginator.num_pages }}" class="w3-hover-blue">last &raquo;</a></li>
+{% endif %}
+  {% comment %} <li><a href="#" class="w3-hover-black">4</a></li>
+  <li><a href="#" class="w3-hover-orange">&raquo;</a></li> {% endcomment %}
+</ul>
+</div>
+{% block content %}
+{% endblock content %}

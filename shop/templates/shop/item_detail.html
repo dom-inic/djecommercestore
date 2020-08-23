@@ -1,0 +1,45 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+<link rel="stylesheet" href="{% static "shop/materialize/css/materialize.css" %}">
+<link rel="stylesheet" href="{% static "shop/materialize/css/materialize.min.css" %}">
+<link href="{% static 'shop/materialize/js/materialize.js' %}" rel="stylesheet">
+<link href="{% static 'shop/materialize/js/materialize.min.js' %}" rel="stylesheet">
+<link href="{% static 'shop/w3.css' %}" rel="stylesheet">
+</head>
+{% block content %}
+<header class="w3-container w3-light-grey">
+  <h3 style="text-align: center;"><b>{{  item.title }}</b></h3>
+</header>
+
+<div class="w3-container">
+  <p>{{ item.description_short }}</p>
+  <hr>
+  <img style="height: 400px; width: 500px; float: left;" src="{{ item.image.url }}" alt="item image" class=" w3-border w3-padding" >
+  
+  <hr>
+  <div style="text-align: center;">
+  <p>{{ item.description_long }}</p>
+  <hr>
+  <p>{{ item.price }}</p>
+  <hr>
+  <p>{{ item.label }}</p>
+  <hr>
+  <p> {{ item.discount }}</p>
+  <hr>
+
+  <hr>
+  <p> {{ item.category }}</p>
+  <hr>
+  </div>
+</div>
+<a href= "{% url 'cart' %}">
+<button class="w3-btn-block w3-dark-grey">Add to Cart </button>
+</a>
+<a href= "{% url 'home' %}">
+<button class="w3-btn-block w3-red">Back </button>
+</a>
+
+</div>
+{% endblock content %}

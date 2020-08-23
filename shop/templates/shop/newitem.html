@@ -1,0 +1,21 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+<link rel="stylesheet" href="{% static "shop/materialize/css/materialize.css" %}">
+<link rel="stylesheet" href="{% static "shop/materialize/css/materialize.min.css" %}">
+<link href="{% static 'shop/materialize/js/materialize.js' %}" rel="stylesheet">
+<link href="{% static 'shop/materialize/js/materialize.min.js' %}" rel="stylesheet">
+<link href="{% static 'shop/w3.css' %}" rel="stylesheet">
+</head>
+{% block content %}
+
+<form action="{% url 'addnewitem' %}" method="post" enctype="multipart/form-data" class="w3-container">
+	{% csrf_token %}
+	<!-- the as_p modifier tells django to render all the form elements in paragraph format -->
+	{{ form.as_p }}
+	<button name="submit"><b>Add item</b></button>
+</form>
+</div>
+  
+{% endblock content %}
